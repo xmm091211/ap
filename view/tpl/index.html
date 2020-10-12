@@ -1,0 +1,64 @@
+<?php require __DIR__.'/header.html';?>
+
+<section class="content content-boxed">
+    <p class="p-jsxs">拒绝流量劫持，全面使用 HTTPS！</p>
+    <div class="row row_jsxs" id="listApi">
+        <?php if(!empty($list)):
+        foreach($list as $k=>$v):?>
+        <div class="col-sm-4">
+            <a target="_blank" class="block block-link-hover2 ribbon ribbon-modern ribbon-success"
+                href="/doc/<?php echo $v['l_alias'];?>.html">
+                <div class="ribbon-box font-w600">调用：<?php echo $v['l_count'];?></div>
+                <div class="block-content">
+                    <div class="h4 push-5"><?php echo $v['l_title'];?></div>
+                    <p class="text-muted"><?php echo $v['l_desc'];?></p>
+                </div>
+            </a>
+        </div>
+        <?php endforeach;
+        endif;?>
+    </div>
+</section>
+<script>
+    // 是否搜索
+    var isSearch = true;
+    // 监听输入
+    $("#api-search").bind("input propertychange", function (event) {
+        clearTimeout(isSearch);
+        deldsq()
+    });
+
+    // 定时器
+    function deldsq() {
+        isSearch = setTimeout(function () {
+            var search = $("#api-search").val();
+            if (search != '') {
+                $("#listApi").load("/v1/apilist?search=" + search.trim(), function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") { console.log(0) }
+                    if (statusTxt == "error") { console.log(1) }
+                });
+            } else {
+                $("#listApi").load("/v1/apilist", function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") { console.log(0) }
+                    if (statusTxt == "error") { console.log(1) }
+                });
+            }
+        }, 500);
+    }
+
+    $(function () {
+        // 回车事件
+        $("body").bind('keyup', function (event) {
+            if (event.keyCode == 13) {
+                var search = $("#api-search").val();
+                if (search != '') {
+                    $("#listApi").load("/v1/apilist?search=" + search.trim(), function (responseTxt, statusTxt, xhr) {
+                        if (statusTxt == "success") { console.log(0) }
+                        if (statusTxt == "error") { console.log(1) }
+                    });
+                }
+            }
+        });
+    });
+</script>
+<?php require __DIR__.'/footer.html';?>
