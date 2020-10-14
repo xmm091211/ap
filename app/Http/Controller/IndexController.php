@@ -12,8 +12,11 @@ class indexController extends Controllers
         foreach ($apilist as $key => $value) {
             $count = $count + $value['l_count'];
         }
+        // 网站配置
         $web = config('webset');
-        return  view("tpl/index", ['web' => $web, 'list' => $apilist, 'count' => $count]);
+        // 每日调用数
+        $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
+        return  view("tpl/index", ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     //详情页面
@@ -222,6 +225,14 @@ class indexController extends Controllers
     // 记数器
     public function statisticsVisitCount()
     {
+        // 今日调用多少次
+        $one_day = date("Y-m-d");
+        // 读取今日调用数
+        $online_day_log = config($one_day, 'count', WWW_CACHE_PATH);
+        // 今日调用计数
+        $one_day_data['count'] = $online_day_log + 1;
+        //更新今日计数
+        Storage::hold_all(WWW_CACHE_PATH . $one_day . '.php', $one_day_data);
         // 获取总数
         $online_log = config('count', 'count');
         $data['count'] = $online_log + 1;
