@@ -1,110 +1,110 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/assets/awesome/css/main.css">
-    <link type="text/css" href="/assets/awesome/css/font-awesome.min.css" rel="stylesheet">
-    <title>用户注册</title>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/assets/awesome/css/main.css">
+  <link type="text/css" href="/assets/awesome/css/font-awesome.min.css" rel="stylesheet">
+  <title>用户注册</title>
+</head>
 
-  <body>
-    <section class="material-half-bg">
-      <div class="cover"></div>
-    </section>
-    <section class="login-content">
-      <div class="logo">
-        <h1>Zero - Art</h1>
-      </div>
-      <div class="login-box" style="min-height: 570px;">
-        <form id="user-register" class="login-form">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>用户注册</h3>
-          <div class="form-group">
-            <label class="control-label">账号</label>
-            <input class="form-control" type="text" name="username" value="" placeholder="请输入登录账号" autofocus>
+<body>
+  <section class="material-half-bg">
+    <div class="cover"></div>
+  </section>
+  <section class="login-content">
+    <div class="logo">
+      <h1>Zero - Art</h1>
+    </div>
+    <div class="login-box" style="min-height: 570px;">
+      <form id="user-register" class="login-form">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>用户注册</h3>
+        <div class="form-group">
+          <label class="control-label">账号</label>
+          <input class="form-control" type="text" name="username" value="" placeholder="请输入登录账号" autofocus>
+        </div>
+        <div class="form-group">
+          <label class="control-label">密码</label>
+          <input class="form-control" type="password" name="password" placeholder="请输入登录密码">
+        </div>
+        <div class="form-group">
+          <label class="control-label">邮箱</label>
+          <input class="form-control" type="text" name="email" value="" placeholder="用于密码找回" autofocus>
+        </div>
+        <div class="form-group">
+          <label class="control-label">验证码</label>
+          <div style="position: relative;">
+            <input class="form-control" id="valcode" style="width: 150px;" type="text" name="code" placeholder="请输入验证码">
+            <img id="code" style="cursor:pointer;position: absolute;top: 3px;right: 0px;" src="/code/register"
+              onclick="javascript:this.src='/code/register?'+Math.random()" title="看不清？点击更换" align="absmiddle" />
           </div>
-          <div class="form-group">
-            <label class="control-label">密码</label>
-            <input class="form-control" type="password" name="password" placeholder="请输入登录密码">
-          </div>
-          <div class="form-group">
-            <label class="control-label">邮箱</label>
-            <input class="form-control" type="text" name="email" value="" placeholder="用于密码找回" autofocus>
-          </div>
-          <div class="form-group">
-            <label class="control-label">验证码</label>
-            <div style="position: relative;">
-              <input class="form-control" id="valcode" style="width: 150px;" type="text" name="code"
-                placeholder="请输入验证码">
-              <img id="code" style="cursor:pointer;position: absolute;top: 3px;right: 0px;" src="/code/register"
-                onclick="javascript:this.src='/code/register?'+Math.random()" title="看不清？点击更换" align="absmiddle" />
+        </div>
+        <div class="form-group">
+          <div class="utility">
+            <div class="animated-checkbox">
+              <label>
+                <input type="checkbox">
+                <span class="label-text">记住密码</span> </label>
             </div>
+            <p class="semibold-text mb-2"><a href="/user/forget.html">忘记密码</a></p>
+            <p class="semibold-text mb-2"><a href="/user/login.html">我已有账号</a></p>
           </div>
-          <div class="form-group">
-            <div class="utility">
-              <div class="animated-checkbox">
-                <label>
-                  <input type="checkbox">
-                  <span class="label-text">记住密码</span> </label>
-              </div>
-              <p class="semibold-text mb-2"><a href="/user/forget.html">忘记密码</a></p>
-              <p class="semibold-text mb-2"><a href="/user/login.html">我已有账号</a></p>
-            </div>
-          </div>
-          <div class="form-group btn-container">
-            <button type="button" class="btn btn-primary btn-block"><i
-                class="fa fa-sign-in fa-lg fa-fw"></i>立即注册</button>
-          </div>
-          <span style="color:#e60c0c"></span>
-          <div style="margin-top: 10px;text-align: left;">
-            <p class="semibold-text mb-2"><a href="../">返回首页</a></p>
-          </div>
-        </form>
-      </div>
-    </section>
-    <!-- Essential javascripts for application to work-->
-    <script src="/assets/other/js/jquery.min.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="/assets/awesome/js/plugins/pace.min.js"></script>
-    <script src="/assets/layui/layui.all.js"></script>
-    <script type="text/javascript">
-      // Login Page Flipbox control
-      $('.login-content [data-toggle="flip"]').click(function () {
-        $('.login-box').toggleClass('flipped');
-        return false;
-      });
+        </div>
+        <div class="form-group btn-container">
+          <button type="button" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>立即注册</button>
+        </div>
+        <span style="color:#e60c0c"></span>
+        <div style="margin-top: 10px;text-align: left;">
+          <p class="semibold-text mb-2"><a href="../">返回首页</a></p>
+        </div>
+      </form>
+    </div>
+  </section>
+  <!-- Essential javascripts for application to work-->
+  <script src="/assets/other/js/jquery.min.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="/assets/awesome/js/plugins/pace.min.js"></script>
+  <script src="/assets/layui/layui.all.js"></script>
+  <script type="text/javascript">
+    // Login Page Flipbox control
+    $('.login-content [data-toggle="flip"]').click(function () {
+      $('.login-box').toggleClass('flipped');
+      return false;
+    });
 
-      $('#user-register button').click(function () {
-        /*实例化表单数据*/
-        var fd = new FormData(document.getElementById('user-register'));
-        $.ajax({
-          url: '/user/register',
-          type: "POST",
-          timeout: "5000",
-          dataType: "json",
-          contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-          data: fd,
-          contentType: false,
-          processData: false,
-          success: function (data) {
-            if (data.code == "200") {
-              layer.msg(data.msg, { time: 1000 }, function () {
-                window.location.href = "/user/login.html";
-              });
-            } else {
-              document.getElementById('code').src = '/code/register?' + Math.random();
-              document.getElementById('valcode').value = "";
-              layer.msg(data.msg);
-            }
-          },
-          error: function (XMLResponse) {
-            layer.msg(XMLResponse.error);
+    $('#user-register button').click(function () {
+      /*实例化表单数据*/
+      var fd = new FormData(document.getElementById('user-register'));
+      $.ajax({
+        url: '/user/register',
+        type: "POST",
+        timeout: "5000",
+        dataType: "json",
+        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          if (data.code == "200") {
+            layer.msg(data.msg, {
+              time: 1000
+            }, function () {
+              window.location.href = "/user/login.html";
+            });
+          } else {
+            document.getElementById('code').src = '/code/register?' + Math.random();
+            document.getElementById('valcode').value = "";
+            layer.msg(data.msg);
           }
-        });
+        },
+        error: function (XMLResponse) {
+          layer.msg("注册异常");
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 
 </html>
