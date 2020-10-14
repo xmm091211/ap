@@ -301,13 +301,20 @@ class SMTP
                 self::DEBUG_CONNECTION
             );
             set_error_handler(array($this, 'errorHandler'));
-            $this->smtp_conn = fsockopen(
-                $host,
-                $port,
-                $errno,
-                $errstr,
+            // 修改
+            // $this->smtp_conn = fsockopen(
+            //     $host,
+            //     $port,
+            //     $errno,
+            //     $errstr,
+            //     $timeout
+            // );
+            $this->smtp_conn = @stream_socket_client(
+                $host . ':' . $port,  // the host of the server
+                $errno,  // error number if any
+                $errstr, // error message if any
                 $timeout
-            );
+            );  // give up after ? secs
             restore_error_handler();
         }
         // Verify we connected properly
