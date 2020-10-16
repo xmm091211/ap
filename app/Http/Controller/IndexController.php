@@ -16,6 +16,7 @@ class indexController extends Controllers
         $web = config('webset');
         // 每日调用数
         $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
+        $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
         return  view("tpl/index", ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
@@ -27,7 +28,11 @@ class indexController extends Controllers
         $data['info'] = self::$db->fetchRow(ADMIN_APIDOC, [$id]); //基本信息
         $data['val'] = self::$db->fetchAll(ADMIN_VALDOC, [$data['info']['l_id']]); //参数
         $web = config('webset');
-        view("tpl/doc", ['web' => $web, 'data' => $data]);
+        $count = config('count')['count'];
+        // 每日调用数
+        $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
+        $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
+        view("tpl/doc", ['web' => $web, 'data' => $data, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     // 接口列表
