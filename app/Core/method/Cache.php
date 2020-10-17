@@ -1,5 +1,5 @@
-
 <?php
+
 /**
  * FileCache php文件缓存类
  */
