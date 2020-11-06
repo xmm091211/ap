@@ -115,7 +115,14 @@ class Request
                             } else {
                                 //判断数据是否为输出对象
                                 if ($name == $obj) {
-                                    $dat = $value;
+                                    // 获取参数格式化条件
+                                    $val_len = strpos($value, '?');
+                                    if ($val_len) {
+                                        // 参数格式化
+                                        $dat = substr($value,0,$val_len);
+                                    } else {
+                                        $dat = $value;
+                                    }
                                 }
                             }
                         }
