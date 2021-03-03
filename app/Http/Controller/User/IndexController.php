@@ -77,8 +77,7 @@ class indexController extends Controllers
     {
         Authentication::UserAuth();
         //账单数据查询
-        $data = [];
-        // dd($data);
+        $data = self::$db->fetchAll(PAY_BILL, [$_SESSION['userinfo']['u_name']]);
         view("user/buypay", ['data' => $data]);
     }
 
