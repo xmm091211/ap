@@ -182,7 +182,7 @@ www  WEB部署目录（或者子目录）
 │  └─database.php       数据库配置文件
 │
 ├─view                  框架视图目录
-│  └─web.php            路由配置文件
+│  └─...                视图模板文件
 │
 ├─LICENSE               授权说明文件
 ├─README.md             README 文件
