@@ -38,7 +38,7 @@ define('APP_WWW', __DIR__ . '/../../');
 /**
  * 插件目录路径
  */
-define('APP_PLUGIN_PATH', __DIR__ . '/../plugin/');
+define('APP_PLUGIN_PATH', __DIR__ . '/../Plugin/');
 
 /**
  * 网站根目录
