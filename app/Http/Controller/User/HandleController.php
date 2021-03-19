@@ -95,7 +95,7 @@ class HandleController extends Controllers
         $val = Request::post();
         $val_name = ["old_passwd", 'new_passwd', 'news_passwd'];
         if (is_empty($val_name, $val)) {
-            if (api_md5($val['old_passwd']) == $_SESSION['info']['a_passwd']) {
+            if (api_md5($val['old_passwd']) == $_SESSION['userinfo']['u_passwd']) {
                 if ($val['new_passwd'] == $val['news_passwd']) {
                     // 设置更新信息
                     $info = [api_md5($val['new_passwd']), $_SESSION['userinfo']['u_name']];
