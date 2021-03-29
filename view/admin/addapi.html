@@ -178,8 +178,8 @@
         //监听别名
         $('#alias').bind('input propertychange', function () {
             if ($(this).val()) {
-                $('#address').val(apiUrl + $(this).val() + "/");
-                $('#ask').val(apiUrl + $(this).val() + "/");
+                $('#address').val(apiUrl + $(this).val());
+                $('#ask').val(apiUrl + $(this).val());
             } else {
                 $('#address').val('');
                 $('#ask').val('');
