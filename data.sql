@@ -2,7 +2,8 @@
 SQLyog Professional v12.08 (64 bit)
 MySQL - 5.5.29-log : Database - xapi
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -74,7 +75,7 @@ CREATE TABLE `api_info` (
 
 /*Data for the table `api_info` */
 
-insert  into `api_info`(`a_l_id`,`a_l_title`,`a_l_desc`,`a_l_alias`,`a_l_address`,`a_l_format`,`a_l_mode`,`a_l_ask`,`a_l_demo`,`a_l_example`,`a_l_data`,`a_l_show`,`a_l_found_time`,`a_l_count`,`a_l_pay`) values (1,'二维码生成','快速将URL或者文字生成二维码','QRcode','http://xapi.la/api/QRcode','JSON','GET','http://xapi.la/api/QRcode?frame=1&e=L&text=零艺客&size=200','暂无示例,站长交流群：708298599 进行交流','',NULL,1,'2020-05-10 23:06:45',0,0),(2,'ICP备案查询','快速查询域名备案信息','icp','http://xapi.la/api/icp','JSON','GET','http://xapi.la/api/icp?url=qq.com','','',NULL,1,'2020-05-10 23:41:56',1,0);
+insert  into `api_info`(`a_l_id`,`a_l_title`,`a_l_desc`,`a_l_alias`,`a_l_address`,`a_l_format`,`a_l_mode`,`a_l_ask`,`a_l_demo`,`a_l_example`,`a_l_data`,`a_l_show`,`a_l_found_time`,`a_l_count`,`a_l_pay`) values (1,'二维码生成','快速将URL或者文字生成二维码','Qrcode','http://xapi.la/api/qrcode','JSON','GET','http://xapi.la/api/qrcode?frame=1&e=L&text=零艺客&size=200','暂无示例,站长交流群：708298599 进行交流','',NULL,1,'2020-05-10 23:06:45',0,0),(2,'ICP备案查询','快速查询域名备案信息','icp','http://xapi.la/api/icp','JSON','GET','http://xapi.la/api/icp?url=qq.com','','',NULL,1,'2020-05-10 23:41:56',1,0);
 
 /*Table structure for table `api_order` */
 
