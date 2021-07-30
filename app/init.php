@@ -16,6 +16,12 @@ date_default_timezone_set("Asia/Shanghai"); //校准时间
 $start_record = time(); //开始时间，放在页面头部
 // ob_start(); //开启缓存
 
+// 第三方扩展库
+if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
+    // 第三方扩展自动加载
+    require __DIR__ . "/../vendor/autoload.php";
+}
+
 //初始化核心
 require __DIR__ . '/Core/app.php';
 //引入插件模块
