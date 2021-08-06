@@ -1,0 +1,117 @@
+<?php require __DIR__.'/header.html';?>
+
+<section class="content content-boxed">
+    <p class="p-jsxs">拒绝流量劫持，全面使用 HTTPS！</p>
+    <div class="row row_jsxs" id="listApi">
+        <?php if(!empty($list)):
+        foreach($list as $k=>$v):?>
+        <div class="col-sm-4">
+            <a target="_blank" class="block block-link-hover2 ribbon ribbon-modern ribbon-success"
+                href="/doc/<?php echo $v['l_alias'];?>.html">
+                <div class="ribbon-box font-w600">调用：
+                    <?php echo $v['l_count'];?>
+                </div>
+                <div class="block-content">
+                    <div class="h4 push-5">
+                        <?php echo $v['l_title'];?>
+                    </div>
+                    <p class="text-muted">
+                        <?php echo $v['l_desc'];?>
+                    </p>
+                </div>
+            </a>
+        </div>
+        <?php endforeach;
+        endif;?>
+    </div>
+</section>
+<script>
+    // 是否搜索
+    var isSearch = true;
+    // 监听输入
+    $("#api-search").bind("input propertychange", function (event) {
+        clearTimeout(isSearch);
+        deldsq()
+    });
+
+    // 定时器
+    function deldsq() {
+        isSearch = setTimeout(function () {
+            var search = $("#api-search").val();
+            if (search != '') {
+                $("#listApi").load("/v1/apilist?search=" + search.trim(), function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") { console.log(0) }
+                    if (statusTxt == "error") { console.log(1) }
+                });
+            } else {
+                $("#listApi").load("/v1/apilist", function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "success") { console.log(0) }
+                    if (statusTxt == "error") { console.log(1) }
+                });
+            }
+        }, 500);
+    }
+
+    $(function () {
+        // 回车事件
+        $("body").bind('keyup', function (event) {
+            if (event.keyCode == 13) {
+                var search = $("#api-search").val();
+                if (search != '') {
+                    $("#listApi").load("/v1/apilist?search=" + search.trim(), function (responseTxt, statusTxt, xhr) {
+                        if (statusTxt == "success") { console.log(0) }
+                        if (statusTxt == "error") { console.log(1) }
+                    });
+                }
+            }
+        });
+    });
+
+    //<?php if($web['gg']):?>
+    //公告弹窗
+    layui.use('layer', function () {
+        var $ = layui.jquery, layer = layui.layer;
+        //储存弹窗Cookies(24小时一次)
+        window.onload = function () {//判断Cookie是否存在
+            //================
+            var s = document.cookie;//得到Cookie
+            if (s.indexOf('notice=1') != -1) return; //存在cookie退出下面代码的执行
+            var d = new Date();
+            d.setHours(d.getHours() + 24); //Cookie有效期24小时
+            // document.cookie = 'notice=1;expires=' + d.toGMTString();//设置cookie
+            //================
+            /*自己弹窗代码*/
+            popnotice();//弹出提示层
+            //console.log("控制台弹出信息！");
+        }
+        //触发弹窗事件
+        window.popnotice = function popnotice() {
+            layer.open({
+                type: 1,
+                title: '<strong>公告：</strong>',//公告标题
+                closeBtn: false, //不显示标题栏
+                area: '320px;',//提示窗宽度
+                shade: 0.8,//透明度
+                id: 'Mainnotice', //设定一个id，防止重复弹出
+                btn: ['前往捐赠', '我晓得了'],//按钮
+                btnAlign: 'c',
+                moveType: 1, //拖拽模式，0或者1
+                // padding:弹窗两侧边距 line-height:行距
+                content: '<div style="padding: 30px; line-height: 24px; background-color: #393D49; color: #fff; font-weight: 300; font-size: 16px;"><p style="text-indent: 2em;"><?php echo $web["gg"];?></div>',
+                success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').attr({
+                        href: '/'//跳转地址
+                        , target: '_blank'//跳转方式
+                    });
+                }
+            });
+        }
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+    });
+    // <?php endif;?>
+</script>
+<?php require __DIR__.'/footer.html';?>

@@ -9,7 +9,7 @@
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item">添加接口</li>
+      <li class="breadcrumb-item">网站设置</li>
     </ul>
   </div>
   <div class="row">
@@ -43,6 +43,29 @@
                 <input class="form-control" id="time" type="text" aria-describedby="time" name="time"
                   value="<?php echo $web['time']; ?>" placeholder="2019/02/14 18:00:00">
               </div>
+              <div class="form-group">
+                <label for="ten">网站模板</label>
+                <select class="form-control" name="template" id="ten">
+                  <?php $ag = tenList(); $is = 0;
+                  foreach ($ag as $key => $value) {
+                    if ($value == $web['template']) {
+                        $is = 1;
+                        echo '<option value="' . $value . '">' . $value . '</option>';
+                        foreach ($ag as $key => $val) {
+                            if ($val != $web['template']) {
+                                echo '<option value="' . $val . '">' . $val . '</option>';
+                            }
+                        }
+                    }
+                  }
+                  if (!$is) {
+                    foreach ($ag as $key => $val) {
+                      echo '<option value="' . $val . '">' . $val . '</option>';
+                    }
+                  }
+                	?>
+                </select>
+              </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
@@ -62,8 +85,13 @@
               </div>
               <div class="form-group">
                 <label for="about">关于</label>
-                <textarea class="form-control" id="about" name="about" rows="4"
+                <textarea class="form-control" id="about" name="about" rows="3"
                   placeholder='关于'><?php echo $web['about']; ?></textarea>
+              </div>
+              <div class="form-group">
+                <label for="about">公告</label>
+                <textarea class="form-control" id="gg" name="gg" rows="2"
+                  placeholder='公告内容留空不弹出，默认自动弹出'><?php echo $web['gg']; ?></textarea>
               </div>
             </div>
           </div>

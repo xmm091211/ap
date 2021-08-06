@@ -17,7 +17,7 @@ class indexController extends Controllers
         // 每日调用数
         $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
         $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
-        return  view("tpl/index", ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
+        return  view(optTen($web['template'], "index"), ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     //详情页面
@@ -32,7 +32,7 @@ class indexController extends Controllers
         // 每日调用数
         $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
         $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
-        view("tpl/doc", ['web' => $web, 'data' => $data, 'count' => $count, 'dayCount' => $dayCount]);
+        view(optTen($web['template'], "doc"), ['web' => $web, 'data' => $data, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     // 接口列表
