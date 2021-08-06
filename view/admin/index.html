@@ -16,7 +16,9 @@
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                 <div class="info">
                     <h4>平台会员</h4>
-                    <p><b><?php echo count($data['total']);?>人</b></p>
+                    <p><b>
+                            <?php echo count($data['total']);?>人
+                        </b></p>
                 </div>
             </div>
         </div>
@@ -24,7 +26,9 @@
             <div class="widget-small info coloured-icon"><i class="icon fa ly iconjinri"></i>
                 <div class="info">
                     <h4>今日注册</h4>
-                    <p><b><?php echo count($data['register']);?>人</b></p>
+                    <p><b>
+                            <?php echo count($data['register']);?>人
+                        </b></p>
                 </div>
             </div>
         </div>
@@ -32,7 +36,9 @@
             <div class="widget-small warning coloured-icon"><i class="icon fa ly iconjinrirenwu"></i>
                 <div class="info">
                     <h4>累计收益</h4>
-                    <p><b><?php echo $data['profit'];?>元</b></p>
+                    <p><b>
+                            <?php echo $data['profit'];?>元
+                        </b></p>
                 </div>
             </div>
         </div>
@@ -40,7 +46,9 @@
             <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
                 <div class="info">
                     <h4>平台接口</h4>
-                    <p><b><?php echo count($data['api']);?>个</b></p>
+                    <p><b>
+                            <?php echo count($data['api']);?>个
+                        </b></p>
                 </div>
             </div>
         </div>
@@ -97,7 +105,8 @@
                             </tr>
                             <tr>
                                 <td>服务器读写权限 </td>
-                                <td><?php echo is_writable('../config/webset.php') ? '<span style="color: green;">可写</span>' : '<span style="color: red;">不可写</span>' ?>
+                                <td>
+                                    <?php echo is_writable('../config/webset.php') ? '<span style="color: green;">可写</span>' : '<span style="color: red;">不可写</span>' ?>
                                 </td>
                             </tr>
                             <tr>
@@ -109,7 +118,8 @@
                             <tr>
                                 <td>源码当前版本</td>
                                 <td style="padding-bottom: 0;">
-                                    v1.0
+                                    v
+                                    <?php echo getVersion();?>
                                 </td>
                             </tr>
                         </tbody>

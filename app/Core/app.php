@@ -26,3 +26,5 @@ require __DIR__ . '/../Http/Model/app.php';
 require __DIR__ . '/../Http/Controller/Controller.php';
 //引入自定义方法库
 require __DIR__ . '/../Http/Method/app.php';
+// 版本控制器
+require __DIR__ . '/../version.php';
