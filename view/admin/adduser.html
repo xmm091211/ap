@@ -75,7 +75,7 @@
                 success: function (data) {
                     if (data.code == "200") {
                         layer.msg(data.msg, { time: 1500 }, function () {
-                            window.location.href = "/admin/userinfo.html";
+                            window.location.href = "/<?php echo ADMIN_PATH;?>/userinfo.html";
                         });
                     } else {
                         layer.msg(data.msg);

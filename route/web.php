@@ -9,6 +9,9 @@
  *	2019-12-25 18:37:45
  */
 
+// 后台路径
+define("ADMIN_PATH", "admin2");
+
 //前台首页
 Route::get("/", "IndexController@index");
 
@@ -111,61 +114,61 @@ Route::post("/user/passwd", "User/HandleController@passwd");
 #后台################################################
 
 //后台登录页
-Route::get("/admin/login.html", "Admin/IndexController@login");
+Route::get("/" . ADMIN_PATH . "/login.html", "Admin/IndexController@login");
 
 //后台首页
-Route::get("/admin", "Admin/IndexController@index");
-Route::get('/admin' . '/', "Admin/IndexController@index");
-Route::get("/admin/index.html", "Admin/IndexController@index");
+Route::get("/" . ADMIN_PATH, "Admin/IndexController@index");
+Route::get("/" . ADMIN_PATH . '/', "Admin/IndexController@index");
+Route::get("/" . ADMIN_PATH . "/index.html", "Admin/IndexController@index");
 
 //后台接口添加页
-Route::get("/admin/addapi.html", "Admin/IndexController@addapi");
+Route::get("/" . ADMIN_PATH . "/addapi.html", "Admin/IndexController@addapi");
 
 //后台参数设置页
-Route::get("/admin/apiinfo.html", "Admin/IndexController@apiinfo");
+Route::get("/" . ADMIN_PATH . "/apiinfo.html", "Admin/IndexController@apiinfo");
 
 //后台数据绑定页
-Route::get("/admin/datainfo.html", "Admin/IndexController@datainfo");
+Route::get("/" . ADMIN_PATH . "/datainfo.html", "Admin/IndexController@datainfo");
 
 //后台文件绑定页
-Route::get("/admin/fileinfo.html", "Admin/IndexController@fileinfo");
+Route::get("/" . ADMIN_PATH . "/fileinfo.html", "Admin/IndexController@fileinfo");
 
 //后台接口编辑页
-Route::get("/admin/editapi/{id}", "Admin/IndexController@editapi");
+Route::get("/" . ADMIN_PATH . "/editapi/{id}", "Admin/IndexController@editapi");
 
 
 //后台接口列表页
-Route::get("/admin/apilist.html", "Admin/IndexController@apilist");
+Route::get("/" . ADMIN_PATH . "/apilist.html", "Admin/IndexController@apilist");
 
 //后台网站设置页
-Route::get("/admin/webset.html", "Admin/IndexController@webset");
+Route::get("/" . ADMIN_PATH . "/webset.html", "Admin/IndexController@webset");
 
 //后台会员列表页
-Route::get("/admin/userinfo.html", "Admin/IndexController@userinfo");
+Route::get("/" . ADMIN_PATH . "/userinfo.html", "Admin/IndexController@userinfo");
 
 //后台支付设置页
-Route::get("/admin/payset.html", "Admin/IndexController@payset");
+Route::get("/" . ADMIN_PATH . "/payset.html", "Admin/IndexController@payset");
 
 //后台退出登录
-Route::get("/admin/logout", "Admin/IndexController@logout");
+Route::get("/" . ADMIN_PATH . "/logout", "Admin/IndexController@logout");
 
 //后台密码修改
-Route::get("/admin/passwd.html", "Admin/IndexController@passwd");
+Route::get("/" . ADMIN_PATH . "/passwd.html", "Admin/IndexController@passwd");
 
 //后台用户编辑
-Route::get("/admin/useredit/{id}", "Admin/IndexController@useredit");
+Route::get("/" . ADMIN_PATH . "/useredit/{id}", "Admin/IndexController@useredit");
 
 //后台会员添加
-Route::get("/admin/adduser.html", "Admin/IndexController@adduser");
+Route::get("/" . ADMIN_PATH . "/adduser.html", "Admin/IndexController@adduser");
 
 //后台邮箱配置
-Route::get("/admin/email.html", "Admin/IndexController@email");
+Route::get("/" . ADMIN_PATH . "/email.html", "Admin/IndexController@email");
 
 //redis配置
-Route::get("/admin/redis.html", "Admin/IndexController@redis");
+Route::get("/" . ADMIN_PATH . "/redis.html", "Admin/IndexController@redis");
 
 // 后台订单页
-Route::get("/admin/order.html", "Admin/IndexController@order");
+Route::get("/" . ADMIN_PATH . "/order.html", "Admin/IndexController@order");
 
 #数据处理##########################################
 
