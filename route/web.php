@@ -10,7 +10,7 @@
  */
 
 // 后台路径
-define("ADMIN_PATH", "admin2");
+define("ADMIN_PATH", "admin");
 
 //前台首页
 Route::get("/", "IndexController@index");
