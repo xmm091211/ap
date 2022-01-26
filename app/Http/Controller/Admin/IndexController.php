@@ -9,7 +9,7 @@ class indexController extends Controllers
         if (isset($_SESSION[api_admin_auth]) && $_SESSION[api_admin_auth] === true) {
             return redirect('index.html');
         }
-        view("admin/login");
+        view(ADMIN_PATH . "/login");
     }
 
     //接口编辑
@@ -46,7 +46,7 @@ class indexController extends Controllers
         // dd($data['field']);
         // dd($data);
 
-        view("admin/editapi", ['data' => $data]);
+        view(ADMIN_PATH . "/editapi", ['data' => $data]);
     }
 
     //后台首页
@@ -66,14 +66,14 @@ class indexController extends Controllers
             $m = $m + $value['money'];
         }
         $data['profit'] = $m;
-        view("admin/index", ['data' => $data]);
+        view(ADMIN_PATH . "/index", ['data' => $data]);
     }
 
     //添加接口页
     public function addapi()
     {
         Authentication::AdminAuth();
-        view("admin/addapi");
+        view(ADMIN_PATH . "/addapi");
     }
 
     //数据绑定页
@@ -99,7 +99,7 @@ class indexController extends Controllers
             $d[$key] = $value['Tables_in_' . $table_name];
         }
         $data['table'] = $d;
-        view("admin/datainfo", ['data' => $data]);
+        view(ADMIN_PATH . "/datainfo", ['data' => $data]);
     }
 
     // 文件绑定页
@@ -123,7 +123,7 @@ class indexController extends Controllers
             $d[$key] = $value['Tables_in_' . $table_name];
         }
         $data['table'] = $d;
-        view("admin/fileinfo", ['data' => $data]);
+        view(ADMIN_PATH . "/fileinfo", ['data' => $data]);
     }
 
     //参数设置页
@@ -132,7 +132,7 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         //接口数据查询
         $data = self::$db->fetchAll(ADMIN_ADDLIST);
-        view("admin/apiinfo", ['data' => $data]);
+        view(ADMIN_PATH . "/apiinfo", ['data' => $data]);
     }
 
     //接口列表页
@@ -141,7 +141,7 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         //数据查询
         $data = self::$db->fetchAll(ADMIN_ADDLIST);
-        view('admin/apilist', ['data' => $data]);
+        view(ADMIN_PATH . '/apilist', ['data' => $data]);
     }
 
     //网站设置页
@@ -150,7 +150,7 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         //获取网站数据
         $web = config('webset');
-        view("admin/webset", ['web' => $web]);
+        view(ADMIN_PATH."/webset", ['web' => $web]);
     }
 
     //会员列表页
@@ -160,14 +160,14 @@ class indexController extends Controllers
 
         $data = self::$db->fetchAll(ADMIN_USER);
 
-        view('admin/userinfo', ['data' => $data]);
+        view(ADMIN_PATH.'/userinfo', ['data' => $data]);
     }
 
     //修改密码
     public function passwd()
     {
         Authentication::AdminAuth();
-        view("admin/passwd");
+        view(ADMIN_PATH."/passwd");
     }
 
     //退出登录
@@ -176,7 +176,7 @@ class indexController extends Controllers
         //清除Session
         unset($_SESSION[api_admin_auth]);
         unset($_SESSION['info']);
-        redirect("/admin/login.html");
+        redirect(ADMIN_PATH."/login.html");
     }
 
     //用户编辑
@@ -185,14 +185,14 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         $id = Request::get('id');
         $data = self::$db->fetchRow(ADMIN_USER_ROW, [$id]);
-        view("admin/useredit", ['data' => $data]);
+        view(ADMIN_PATH."/useredit", ['data' => $data]);
     }
 
     //用户添加
     public function adduser()
     {
         Authentication::AdminAuth();
-        view("admin/adduser");
+        view(ADMIN_PATH."/adduser");
     }
 
     //邮箱配置
@@ -200,7 +200,7 @@ class indexController extends Controllers
     {
         Authentication::AdminAuth();
         $web = config('email');
-        view("admin/email", ["web" => $web]);
+        view(ADMIN_PATH."/email", ["web" => $web]);
     }
 
     //redis
@@ -208,7 +208,7 @@ class indexController extends Controllers
     {
         Authentication::AdminAuth();
         $web = config('redis');
-        view("admin/redis", ['web' => $web]);
+        view(ADMIN_PATH."/redis", ['web' => $web]);
     }
 
     // 订单页
@@ -217,6 +217,6 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         $sql = "SELECT * FROM api_order INNER JOIN api_user ON api_order.o_u_id = api_user.a_u_id ORDER BY o_id DESC";
         $data = self::$db->fetchAll($sql);
-        view("admin/order", ['data' => $data]);
+        view(ADMIN_PATH."/order", ['data' => $data]);
     }
 }
