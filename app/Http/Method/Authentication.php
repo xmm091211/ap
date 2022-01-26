@@ -19,7 +19,7 @@ class Authentication extends Controllers
             unset($_SESSION[api_admin_auth]);
             unset($_SESSION['info']);
             if ($redirect === true) {
-                return redirect('/../admin/login.html');
+                return redirect('/../'. ADMIN_PATH .'/login.html');
             } else {
                 response_tips(["code" => "401", "msg" => "非法操作"]);
                 exit();
@@ -33,7 +33,7 @@ class Authentication extends Controllers
             unset($_SESSION[api_admin_auth]);
             unset($_SESSION['info']);
             if ($redirect === true) {
-                return redirect('/../admin/login.html');
+                return redirect('/../'. ADMIN_PATH .'/login.html');
             } else {
                 response_tips(["code" => "401", "msg" => "非法操作"]);
                 exit();

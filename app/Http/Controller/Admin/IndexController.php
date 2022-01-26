@@ -18,7 +18,7 @@ class indexController extends Controllers
         Authentication::AdminAuth();
         //获取ID
         $id = Request::get('id');
-        $data['info'] = self::$db->fetchRow(ADMIN_APIINFO, [$id]); //基本信息
+        $data['info'] = self::$db->fetchRow(ADMIN_APIINFO, [$id]); //基本信息 
 
         $data['data'] = self::$db->fetchRow(ADMIN_DATACHA, [$id]); //数据绑定
 
