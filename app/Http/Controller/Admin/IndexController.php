@@ -176,7 +176,7 @@ class indexController extends Controllers
         //清除Session
         unset($_SESSION[api_admin_auth]);
         unset($_SESSION['info']);
-        redirect("/admin/login.html");
+        redirect(ADMIN_PATH . "/login.html");
     }
 
     //用户编辑
