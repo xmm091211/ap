@@ -67,13 +67,18 @@
 <div class="layui-container">
 	<div class="layui-row">
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend><?php echo $data['info']['l_title'];?></legend>
+			<legend>
+				<?php echo $data['info']['l_title'];?>
+			</legend>
 		</fieldset>
-		<blockquote class="layui-elem-quote"><?php echo $data['info']['l_desc'];?></blockquote>
+		<blockquote class="layui-elem-quote">
+			<?php echo $data['info']['l_desc'];?>
+		</blockquote>
 	</div>
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 		<ul class="layui-tab-title" style="text-align: center!important;">
 			<li class="layui-this">API文档</li>
+			<li>在线测试工具</li>
 			<li>错误码参照</li>
 			<li>示例代码</li>
 		</ul>
@@ -118,10 +123,18 @@
 						foreach ($data['val'] as $k => $v) : 
 						if($v['p_api_type']==0):?>
 						<tr>
-							<td><?php echo $v['p_name'];?></td>
-							<td><?php echo $v['p_crux'];?></td>
-							<td><?php echo $v['p_type'];?></td>
-							<td><?php echo $v['p_desc'];?></td>
+							<td>
+								<?php echo $v['p_name'];?>
+							</td>
+							<td>
+								<?php echo $v['p_crux'];?>
+							</td>
+							<td>
+								<?php echo $v['p_type'];?>
+							</td>
+							<td>
+								<?php echo $v['p_desc'];?>
+							</td>
 						</tr>
 						<?php endif;
 						endforeach;
@@ -142,9 +155,15 @@
 						foreach ($data['val'] as $k => $v):
 						if($v['p_api_type']==1):?>
 						<tr>
-							<td><?php echo $v['p_name'];?></td>
-							<td><?php echo $v['p_type'];?></td>
-							<td><?php echo $v['p_desc'];?></td>
+							<td>
+								<?php echo $v['p_name'];?>
+							</td>
+							<td>
+								<?php echo $v['p_type'];?>
+							</td>
+							<td>
+								<?php echo $v['p_desc'];?>
+							</td>
 						</tr>
 						<?php endif;
 						endforeach;
@@ -153,6 +172,103 @@
 				</table>
 				<p class="linep">返回示例：</p>
 				<pre class="layui-code"><?php echo $data['info']['l_example'];?></pre>
+			</div>
+			<div class="layui-tab-item container">
+				<label>调试工具支持的请求类型有：
+					<code>GET</code>、<code>POST</code>、<code>PUT</code>、<code>HEAD</code>、<code>TRACE</code>、<code>DELETE</code>、<code>CONNECT</code>、<code>OPTIONS</code>
+				</label>
+				<div style="margin-bottom: 50px;padding-right: 0px;" class="form-group row">
+					<div class="col-sm-2 col-md-2">
+						<select id="http_method" name="http_method" class="form-control">
+							<option value="GET">GET</option>
+							<option value="POST">POST</option>
+							<option value="PUT">PUT</option>
+							<option value="HEAD">HEAD</option>
+							<option value="TRACE">TRACE</option>
+							<option value="DELETE">DELETE</option>
+							<option value="CONNECT">CONNECT</option>
+							<option value="OPTIONS">OPTIONS</option>
+						</select>
+					</div>
+
+					<div class="col-sm-8 col-md-8">
+						<input type="text" autocomplete="off" data-zhid="/api/<?php echo $data['info']['l_alias'];?>"
+							value="<?php echo $data['info']['l_address'];?>" id="request_url" readonly name="url"
+							class="form-control">
+					</div>
+					<div class="col-sm-2 col-md-2">
+						<input type="button" id="submit" value="发起请求" class="btn btn-success send_http_request">
+					</div>
+				</div>
+				<br>
+				<div style="margin-bottom: 20px;" id="single_parameter" class="form-group params">
+					<p class="linep">请求参数设置：</p>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 30%;">参数名称</th>
+								<th style="width: 70%;">参数值</th>
+							</tr>
+						</thead>
+						<tbody>
+
+
+							<?php if(!empty($data['val'])):
+									foreach ($data['val'] as $k => $vo):?>
+							<tr class="key">
+								<td>
+									<input value="<?php echo $vo['p_name'];?>" name="keys"
+										class="form-control param_key" type="text" maxlength="100" placeholder="参数名称">
+								</td>
+								<td>
+									<input value="<?php echo $vo['p_type'];?>" name="values"
+										class="form-control param_val" type="text" maxlength="5000"
+										style="width: 70%; float: left;" placeholder="参数数值">
+									<button type="button" onclick="del_param(this);"
+										class="btn btn-primary btn-sm del_btn">删除参数</button>
+								</td>
+							</tr>
+							<?php endforeach;
+									endif; ?>
+
+							<!-- params -->
+							<tr>
+								<td colspan="2">
+									<button type="button" onclick="add_param();"
+										class="btn btn-success addParamenter">添加参数</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<div style="margin-bottom: 20px;display:none;" id="butch_parameter" class="form-group header">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 30%;">参数支持JSON格式，以及GET参数请求方式</th>
+								<th style="width: 70%;">
+									<button type="button"
+										onclick="parameter_exc('#butch_parameter','#single_parameter',0)"
+										class="btn btn-success">
+										<i class="glyphicon glyphicon-share-alt"></i>返回键值对添加请求参数</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="2">
+									<textarea class="form-control" rows="3" name="butchParameter" maxlength="5000"
+										placeholder=""></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<label>返回结果</label>
+				<pre id="return_case"
+					style="padding: 16px;overflow: auto;font-size: 85%;line-height: 1.45;background-color: #f0f1f3;border-radius: 3px;word-wrap:normal;color: #333;margin: 0 0 10px;border: 1px solid #ccc;"><?php echo $data['info']['l_example']?></pre>
 			</div>
 			<div class="layui-tab-item">
 				<p class="linep">错误码格式说明：</p>
@@ -169,9 +285,15 @@
 						foreach ($data['val'] as $k => $v) : 
 						if($v['p_api_type']==2):?>
 						<tr>
-							<td><?php echo $v['p_name'];?></td>
-							<td><?php echo $v['p_type'];?></td>
-							<td><?php echo $v['p_desc'];?></td>
+							<td>
+								<?php echo $v['p_name'];?>
+							</td>
+							<td>
+								<?php echo $v['p_type'];?>
+							</td>
+							<td>
+								<?php echo $v['p_desc'];?>
+							</td>
 						</tr>
 						<?php endif;
 						endforeach;
@@ -197,6 +319,64 @@
 	});
 	clipboard.on('error', function (e) {
 		layer.msg('复制成功!');
+	});
+
+
+	function del_param(obj) {
+		$(obj).parent().parent().remove();
+	}
+
+	function ajax(api, method, data) {
+		var index = layer.load();
+		var defer = $.Deferred();
+		$.ajax({
+			url: api,
+			xhrFields: { withCredentials: true },
+			type: method,
+			dataType: 'json',
+			async: true,
+			data: data,
+			success: function (res) {
+				defer.resolve(res);
+				layer.close(index);
+				layer.msg(res.msg);
+				console.log(222);
+			},
+			error: function (res) {
+				defer.resolve(res);
+				layer.close(index);
+				console.log(111, res);
+			}
+		});
+		return defer;
+	}
+
+	function add_param() {
+		var tr = '<tr class="key">' +
+			'		<td>' +
+			'			<input value="" name="keys" class="form-control param_key" type="text" maxlength="100" placeholder="参数名称">' +
+			'		</td>' +
+			'		<td>' +
+			'		<input value="" name="values" class="form-control param_val" type="text" maxlength="5000" style="width: 70%; float: left;" placeholder="参数数值">' +
+			'		<button type="button" onclick="del_param(this);" class="btn btn-primary btn-sm del_btn">删除参数</button>' +
+			'	</td>' +
+			'</tr>';
+		$('.addParamenter').parent().parent().before(tr);
+	}
+
+	$('.send_http_request').on('click', function () {
+		params = {};
+		$('.param_key').each(function (index, item) {
+			params[$(item).val()] = $('.param_val:eq(' + index + ')').val();
+		});
+
+		var method = $('#http_method option:selected').val();
+		var api = $('#request_url').val();
+		$.when(ajax(api, method, params)).done(function (res) {
+			console.log(res);
+			var fmt_json = JSON.stringify(res, null, "\t");
+			$('#return_case').text(fmt_json);
+		});
 	});
 </script>
 <?php require __DIR__.'/footer.html';?>
