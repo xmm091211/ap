@@ -18,6 +18,12 @@ class HandleController extends Controllers
             if (!filter_var($val['email'], FILTER_VALIDATE_EMAIL)) {
                 return response_tips(["code" => "204", 'msg' => "邮箱格式不正确"]);
             }
+
+            // 验证账号格式
+            if (!preg_match("/^[\x7f-\xff-0-9a-z]+$/i", $val['username'])) { //兼容gb2312,utf-8
+                return response_tips(["code" => "204", 'msg' => "账号格式不正确"]);
+            }
+
             //查询用户是否存在
             $data = self::$db->fetchRow(USER_LOGIN, [$val['username']]);
             //判断查询结果

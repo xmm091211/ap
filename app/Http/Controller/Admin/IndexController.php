@@ -32,7 +32,7 @@ class indexController extends Controllers
         $data['table'] = $d;
 
         //判断绑定数据是否存在
-        if (!$data['data']['b_table'] == null) {
+        if (isset($data['data']) && isset($data['data']['b_table']) && !$data['data']['b_table'] == null) {
             //查询数表字段
             $field = self::$db->fetchAll(ADMIN_FIELD . $data['data']['b_table']);
             //表字段处理

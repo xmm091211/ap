@@ -16,8 +16,9 @@ class indexController extends Controllers
         $web = config('webset');
         // 每日调用数
         $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
-        $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
-        return  view(optTen($web['template'], "index"), ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
+        $dayCount['count'] = isset($dayCount['count'])  ?  $dayCount['count'] : 0;
+        $template = isset($web['template']) ? $web['template'] : "default";
+        return  view(optTen($template, "index"), ['web' => $web, 'list' => $apilist, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     //详情页面
@@ -31,8 +32,9 @@ class indexController extends Controllers
         $count = config('count')['count'];
         // 每日调用数
         $dayCount = config(date("Y-m-d"), null, WWW_CACHE_PATH);
-        $dayCount['count'] = $dayCount['count'] == null ? 0 : $dayCount['count'];
-        view(optTen($web['template'], "doc"), ['web' => $web, 'data' => $data, 'count' => $count, 'dayCount' => $dayCount]);
+        $dayCount['count'] = isset($dayCount['count'])  ? $dayCount['count'] : 0;
+        $template = isset($web['template']) ? $web['template'] : "default";
+        view(optTen($template, "doc"), ['web' => $web, 'data' => $data, 'count' => $count, 'dayCount' => $dayCount]);
     }
 
     // 接口列表
@@ -234,12 +236,14 @@ class indexController extends Controllers
         $one_day = date("Y-m-d");
         // 读取今日调用数
         $online_day_log = config($one_day, 'count', WWW_CACHE_PATH);
+        $online_day_log = $online_day_log ? $online_day_log : 0;
         // 今日调用计数
         $one_day_data['count'] = $online_day_log + 1;
         //更新今日计数
         Storage::hold_all(WWW_CACHE_PATH . $one_day . '.php', $one_day_data);
         // 获取总数
         $online_log = config('count', 'count');
+        $online_log = $online_log ? $online_log : 0;
         $data['count'] = $online_log + 1;
         if (Storage::hold_all(APP_CONFIG . 'count.php', $data) > 0) {
             return true;
