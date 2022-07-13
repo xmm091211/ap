@@ -32,12 +32,57 @@ class  Route
       case 'POST':
         self::post($rule, $method, $action);
         break;
+      case 'PUT':
+        self::all($rule, $method, $action);
+        break;
+      case 'OPTIONS':
+        self::all($rule, $method, $action);
+        break;
+      case 'HEAD':
+        self::all($rule, $method, $action);
+        break;
+      case "DELETE":
+        self::all($rule, $method, $action);
+        break;
       case 'FILES':
         self::post($rule, $method, $action);
         break;
       default:
         exit("不支持的请求类型：" . $_SERVER['REQUEST_METHOD']);
         break;
+    }
+  }
+
+  /**
+   * 任意请求
+   * @param string $rule 地址规则
+   * @param mixed $method 方法/控制器
+   * @param mixed $action 行动
+   */
+  public static function all($rule, $method, $action = null)
+  {
+    //获取参数原型
+    $req = self::valarr();
+    //如果是带参数地址则往下执行，否者执行其他
+    if (self::getmatch($rule, $req)) {
+      //设置地址参数
+      Request::$request = $req;
+      //设置地址规则
+      Request::$rule = $rule;
+      //执行函数还是控制器方法
+      self::ifimp($rule, $method, $action);
+      exit();
+    } else {
+      //判断路由是否一致
+      if ($rule == $req) {
+        //设置地址参数
+        Request::$request = $req;
+        //设置地址规则
+        Request::$rule = $rule;
+        //执行函数还是控制器方法
+        self::ifimp($rule, $method, $action);
+        exit();
+      }
     }
   }
 

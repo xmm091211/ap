@@ -42,11 +42,20 @@ class Request
      */
     public static function post($name = null)
     {
+        // json类型处理
+        $headers = self::getallheaders();
+        $isJson = isset($headers['Content-Type']) ? $headers['Content-Type'] : "";
+        if (strtolower($isJson) != "application/json" && !strstr($isJson, "application/json")) {
+            $post = $_POST;
+        } else {
+            $post = json_decode((file_get_contents("php://input")), true);
+            $_POST = $post;
+        }
         //判断POST书否存在
-        if (isset($_POST)) {
+        if (isset($post)) {
             $dat = null;
             //循环POST数据
-            foreach ($_POST as $key => $value) {
+            foreach ($post as $key => $value) {
                 //判断是否为空，输出全部数据
                 // echo $key;
                 if ($name == null) {
@@ -119,7 +128,7 @@ class Request
                                     $val_len = strpos($value, '?');
                                     if ($val_len) {
                                         // 参数格式化
-                                        $dat = substr($value,0,$val_len);
+                                        $dat = substr($value, 0, $val_len);
                                     } else {
                                         $dat = $value;
                                     }
@@ -138,5 +147,19 @@ class Request
         } else {
             return;
         }
+    }
+
+    /**
+     * 获取请求头方法兼容
+     */
+    public static function getallheaders()
+    {
+        $headers = array();
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+        return $headers;
     }
 }

@@ -73,6 +73,22 @@ class indexController extends Controllers
     //接口通道
     public function api()
     {
+        // ajax 请求的处理方式 
+        if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest") {
+            // 跨域设置
+            header('Access-Control-Allow-Origin:*');
+            // 响应类型  
+            header('Access-Control-Allow-Methods:*');
+            // 响应头设置  
+            header('Access-Control-Allow-Headers:*');
+            if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+                header("HTTP/1.0 200 OK");
+                exit;
+            }
+            // 数据返回格式
+            header('Content-Type: application/json');
+        }
+
         $cof = config('redis');
         $key = get_real_ip();
         //判断是否开启redis
