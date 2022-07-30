@@ -2,6 +2,18 @@
 
 class indexController extends Controllers
 {
+
+    // 非预设页面
+    public function miss()
+    {
+
+        $web = config('webset');
+
+        $template = isset($web['template']) ? $web['template'] : "default";
+
+        return view(optTen($template, "404"), []);
+    }
+
     //前台首页
     public function index()
     {

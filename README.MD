@@ -56,6 +56,22 @@ Route::post("/del/{id}", function () {
 });
 ```
 
+## 3.miss未预设请求处理
+
+> POST请求直接写函数示例
+```php
+//非预设请求直接写函数示例
+Route::miss(function () {
+	echo '非预设请求直接写函数示例';
+});
+```
+
+> POST请求使用控制器示例
+```php
+//POST请求使用控制器示例
+Route::post("indexController@miss");
+```
+
 ## 二、请求
 
 > get()

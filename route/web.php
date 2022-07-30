@@ -247,3 +247,17 @@ Route::post("/admin/editapi", "Admin/HandleController@editapi");
 
 //图片上传接口
 // Route::post('/uploads', "Common/CommonController@upload");
+// echo "执行到了";
+
+// 写法一
+// Route::miss(function () {
+
+//     $web = config('webset');
+
+//     $template = isset($web['template']) ? $web['template'] : "default";
+
+//     return view(optTen($template, "404"), []);
+// });
+
+// 写法二
+Route::miss("IndexController@miss");

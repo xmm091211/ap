@@ -18,6 +18,20 @@ class  Route
   public static $Controllerpath = __DIR__ . '/../../Http/Controller/';
 
   /**
+   *  未命中处理
+   */
+  public static function miss($method, $action = null)
+  {
+    //获取参数原型
+    $req = self::valarr();
+    //设置地址参数
+    Request::$request = $req;
+    //执行函数还是控制器方法
+    self::ifimp("", $method, $action);
+    exit();
+  }
+
+  /**
    * any请求方法
    * @param string $rule 地址规则
    * @param mixed $method 方法/控制器
