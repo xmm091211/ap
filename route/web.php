@@ -79,11 +79,32 @@ Route::get("/code/register", function () {
     require APP_VIEW_PATH . "user/code.php";
 });
 
-//注册验证码
+// 注册邮箱验证码
+Route::post("/code/register", function () {
+
+    // 生成验证码储存
+    $code = '';
+    for ($i = 0; $i < 4; $i++) {
+        $data = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+        $string = substr($data, rand(0, strlen($data)), 1);
+        $code .= $string;
+    }
+    $_SESSION['registercode'] = $code; //存储在session里
+
+    // 发送验证码
+    $info['to'] = $_POST['email'];
+    $info['title'] = $_SERVER['HTTP_HOST'] . "注册验证码";
+    $info['content'] = "验证码" . $code;
+    $ts = true;
+    require APP_PLUGIN_PATH . "/smtp/index.php";
+});
+
+//找回密码验证码
 Route::get("/code/forget", function () {
     $code = "forgetcode";
     require APP_VIEW_PATH . "user/code.php";
 });
+
 
 #用户数据处理#####################################################
 

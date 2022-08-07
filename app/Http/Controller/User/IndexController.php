@@ -13,7 +13,9 @@ class indexController extends Controllers
     //用户注册页
     public function register()
     {
-        view("user/register");
+        $web = config('webset');
+        $emailRegister = isset($web['emailRegister']) ? $web['emailRegister'] : "";
+        view("user/register", ['emailRegister' => $emailRegister]);
     }
 
     //密码找回页

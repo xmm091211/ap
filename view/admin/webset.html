@@ -66,6 +66,18 @@
                 	?>
                 </select>
               </div>
+
+              <div class="form-group">
+                <label for="details">注册邮箱验证</label>
+                <div class="toggle-flip">
+                  <label>
+                    <input type="checkbox" <?php if(isset($web['emailRegister']) &&
+                      !empty($web['emailRegister'])){echo 'checked="checked"' ;}?>
+                    value="1" name="emailRegister">
+                    <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                  </label>
+                </div>
+              </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
@@ -93,6 +105,8 @@
                 <textarea class="form-control" id="gg" name="gg" rows="2"
                   placeholder='公告内容留空不弹出，默认自动弹出'><?php echo $web['gg']; ?></textarea>
               </div>
+
+
             </div>
           </div>
           <div class="tile-footer">
