@@ -98,8 +98,12 @@
             });
           } else {
             layer.msg(data.msg);
-            document.getElementById('code').src = '/code/login?' + Math.random();
-            document.getElementById('valcode').value = "";
+            if (document.getElementById('code')) {
+              document.getElementById('code').src = '/code/login?' + Math.random();
+            }
+            if (document.getElementById('valcode')) {
+              document.getElementById('valcode').value = "";
+            }
           }
         },
         error: function (XMLResponse) {

@@ -1,6 +1,6 @@
 <?php
-$mailpz = require APP_CONFIG . "email.php";
-require __DIR__ . "/functions.php";
+$mailpz = require_once APP_CONFIG . "email.php";
+require_once __DIR__ . "/functions.php";
 if (!empty($mailpz) && !empty($mailpz['mail_pwd'])) {
 	if (@$info['to'] && @$info['title'] && @$info['content']) {
 		$to = $info['to'];

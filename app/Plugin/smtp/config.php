@@ -1,7 +1,7 @@
 <?php
 
 /*邮件配置*/
-$mailpz = require APP_CONFIG . "email.php";
+$mailpz = require_once APP_CONFIG . "email.php";
 
 // $mailpz = array(
 // 	'mail_name' => '零艺客服助手', //发件人姓名

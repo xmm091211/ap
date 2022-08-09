@@ -9,9 +9,11 @@ class HandleController extends Controllers
         //关键字段
         $val_name = ['username', 'password', 'email', 'code'];
         //判断验证码
-        if (strtoupper($val['code']) != strtoupper($_SESSION['registercode'])) {
+        if ($val['code'] && $_SESSION['registercode'] && strtoupper($val['code']) != strtoupper($_SESSION['registercode'])) {
             return response_tips(["code" => "204", 'msg' => "验证码错误"]);
         }
+        // 销毁验证码
+        unset($_SESSION['registercode']);
         //判断关键字段是否为空
         if (is_empty($val_name, $val)) {
             //验证邮箱格式
