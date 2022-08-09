@@ -154,8 +154,12 @@
               window.location.href = "/user/login.html";
             });
           } else {
-            document.getElementById('code').src = '/code/register?' + Math.random();
-            document.getElementById('valcode').value = "";
+             if (document.getElementById('code')) {
+              document.getElementById('code').src = '/code/register?' + Math.random();
+            }
+            if (document.getElementById('valcode')) {
+              document.getElementById('valcode').value = "";
+            }
             layer.msg(data.msg);
           }
         },
