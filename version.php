@@ -1,7 +1,7 @@
 <?php
 
 // 程序版本
-define('APP_VERSION', '2.1');
+define('APP_VERSION', '2.2');
 
 
 // 获取版本号
